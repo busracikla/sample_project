@@ -6,6 +6,7 @@ __all__ = ['Create_Data']
 import os
 import pandas as pd
 from sample_project import config
+from sample_project.helper import write_to_csv, read_from_csv
 from fastcore.utils import store_attr
 import numpy as np
 
@@ -18,37 +19,37 @@ class Create_Data:
         - Consider only transactions whose date in between <start date> and <end date>
         - Consider only customers who have loans with more than <loan_amnt_thrsh> euros
         - Consider only customers from districts which have more than <district_cnt_thrsh> customers
-    '''
-    def __init__(self,trnx_dataset=None, disp_dataset=None, client_dataset=None, loan_dataset=None, loan_amnt_thrsh=1000, district_cnt_thrsh = 100, start_date=900000, end_date=1000000):
 
-        '''
-        Args:
-            trnx_dataset (Pandas DataFrame): The transaction dataset which has at least these fields: "account_id","date"
-            disp_dataset (Pandas DataFrame): The disp dataset which has at least these fields: "client_id","account_id"
-            client_dataset (Pandas DataFrame): The customer info dataset which has at least these fields: "client_id","district_id"
-            loan_dataset (Pandas DataFrame): The loan dataset which has at least these fields: "client_id","amount"
+    Args:
+            trnx_dataset (Pandas DataFrame): The csv file name which has transaction dataset with at least these fields: "account_id","date"
+            disp_dataset (Pandas DataFrame): The csv file name which disp dataset with at least these fields: "client_id","account_id"
+            client_dataset (Pandas DataFrame): The csv file name which customer info dataset with at least these fields: "client_id","district_id"
+            loan_dataset (Pandas DataFrame): The csv file name which loan dataset with at least these fields: "client_id","amount"
             loan_amnt_thrsh (integer): Loan amount threshold to be use to apply filter 2
             district_cnt_thrsh (integer): District count threshold to be used to apply filter 3
             start_date (integer): Start date threshold for transaction dataset to apply filter 1
             end_date (integer): End date threshold for transaction dataset to apply filter 1
+            to_csv (boolean): If the returned dataframe is desired to be written into csv file
 
         Return:
             main_data (pandas DataFrame): the transaction dataset for clients in the scope
-        '''
+    '''
+    def __init__(self,trnx_dataset=None, disp_dataset=None, client_dataset=None, loan_dataset=None, loan_amnt_thrsh=1000,
+                 district_cnt_thrsh = 100, start_date=900000, end_date=1000000, to_csv=True):
 
         store_attr()
 
-        if trnx_dataset == None:
-            self.trnx_dataset = pd.read_csv(config.DATA_DIR + config.CSV_TRANSACTION, index_col=[0])
+        if trnx_dataset == None: trnx_dataset = config.CSV_TRANSACTION
+        self.trnx_dataset = read_from_csv(trnx_dataset)
 
-        if disp_dataset == None:
-            self.disp_dataset = pd.read_csv(config.DATA_DIR + config.CSV_DISP_INFO, index_col=[0])
+        if disp_dataset == None: disp_dataset = config.CSV_DISP_INFO
+        self.disp_dataset = read_from_csv(disp_dataset)
 
-        if client_dataset == None:
-            self.client_dataset = pd.read_csv(config.DATA_DIR + config.CSV_CUST_INFO, index_col=[0])
+        if client_dataset == None: client_dataset = config.CSV_CUST_INFO
+        self.client_dataset = read_from_csv(client_dataset)
 
-        if loan_dataset == None:
-            self.loan_dataset = pd.read_csv(config.DATA_DIR + config.CSV_LOAN, index_col=[0])
+        if loan_dataset == None: loan_dataset = config.CSV_LOAN
+        self.loan_dataset = read_from_csv(loan_dataset)
 
 
     def __call__(self):
@@ -56,6 +57,10 @@ class Create_Data:
         main_data = self._applying_date_filter(self._merge_main_datasets())
         main_data = self._applying_loan_amount_filter(main_data)
         main_data = self._applying_district_filter(main_data)
+
+        if self.to_csv:
+
+            write_to_csv(df= main_data,save_as = config.CSV_CUSTOMIZED_TRNX )
 
         return main_data
 

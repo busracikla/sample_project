@@ -6,10 +6,9 @@ __all__ = ['Label_Data']
 import os
 import pandas as pd
 from sample_project import config
-from sample_project.helper import get_spark_session
+from sample_project.helper import write_to_csv, read_from_csv
 from fastcore.utils import store_attr
 import numpy as np
-from sample_project.preprocess import prepare_transaction_data
 
 # Cell
 class Label_Data:
@@ -20,36 +19,43 @@ class Label_Data:
     2. Label first individual accounts by taking reference date into consideration
     3. Consider activeness of all accounts belong to the customers and label them as churner if there is no active account anymore
 
-    '''
-
-    def __init__(self, trnx_dataset = None, account_info_dataset=None, reference_date = 981231):
-
-        '''
-        Args:
-            trnx_dataset (Pandas DataFrame): The transaction dataset which has at least these fields: "account_id","client_id"
-            account_info_dataset (Pandas DataFrame): The account info dataset which has at least these fields: "account_id", "start_date", "end_date"
+     Args:
+            trnx_dataset (Pandas DataFrame): Csv file name which has transaction dataset with at least these fields: "account_id","client_id"
+            account_info_dataset (Pandas DataFrame): Csv file name which has account info dataset with at least these fields: "account_id", "start_date", "end_date"
             reference_date (integer): The date to be considered in activeness check of accounts
+            to_csv (boolean): If the returned dataframe is desired to be written into csv file
 
         Return:
             labelled_data (pandas DataFrame)
-        '''
+
+    '''
+
+    def __init__(self, trnx_dataset = None, account_info_dataset=None, reference_date = 981231, to_csv=True):
 
         store_attr()
 
         if trnx_dataset == None:
-            trnx_data_creator = prepare_transaction_data.Create_Data(trnx_dataset=None, disp_dataset=None, client_dataset=None, loan_dataset=None, loan_amnt_thrsh=0, district_cnt_thrsh = 0)
-            self.trnx_dataset = trnx_data_creator()
+            trnx_dataset = config.CSV_CUSTOMIZED_TRNX
+
+        self.trnx_dataset = read_from_csv(trnx_dataset)
 
         if account_info_dataset == None:
-            self.account_info_dataset = pd.read_csv(config.DATA_DIR + config.CSV_ACCOUNT_INFO, index_col=[0])
+            account_info_dataset = config.CSV_ACCOUNT_INFO
+
+        self.account_info_dataset = read_from_csv(account_info_dataset)
 
     def __call__(self):
 
         self._fix_error_in_account_info_dataset()
         self._label_accounts()
         self._label_customers()
+        return_data = self._merge_label_with_main_data()
 
-        return self._merge_label_with_main_data()
+        if self.to_csv:
+
+            write_to_csv(return_data,config.CSV_LABELLED_TRNX)
+
+        return return_data
 
     def _fix_error_in_account_info_dataset(self):
 
@@ -79,4 +85,4 @@ class Label_Data:
 
     def _merge_label_with_main_data(self):
 
-        return self.trnx_dataset.merge(self.labelled_cust_data[["client_id","active_or_not"]],on="client_id",how="left")
+        return self.trnx_dataset.merge(self.labelled_cust_data[["client_id","churn_or_not"]],on="client_id",how="left")

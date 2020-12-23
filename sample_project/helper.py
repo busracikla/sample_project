@@ -11,7 +11,7 @@ from sample_project import config
 
 def get_spark_session(mode="yarn", executor_memory=8, driver_memory=32, max_result_size=8):
     '''
-        Common script to create spark session in the notebook
+        Common script to create spark session in the notebook 
         
         Args:
             mode (string): Possible values are "yarn", "local[8]"
@@ -46,8 +46,27 @@ def write_to_hive(sdf, save_as):
     
 
 
+def write_to_csv(df, save_as):
+    '''
+        Common script to write data into csv
+        
+        Args:
+           df (pandas dataframe): Desired data to be written into csv
+           save_as (string): Name of the csv file to be written 
+            
+    '''
+    return df.to_csv(config.DATA_DIR + save_as)
 
 
+def read_from_csv(csv_name):
+    '''
+        Common script to read data from csv
+        
+        Args:
+           csv_name (string): Name of the csv file to be read 
+            
+    '''
+    return pd.read_csv(config.DATA_DIR + csv_name, index_col=[0])
 
 
 

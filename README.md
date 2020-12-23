@@ -1,6 +1,6 @@
 # Sample Project
 
-As a part of my application, I created this project to show a sample from my way of coding. I have found some external datasets which can be used to detect churners. The goal of my sample project is detecting prospective churners with the churn definition which is "customers don't have any active account anymore are considered as churners".  <br>
+As a part of my application, I created this project to show a sample from my way of coding. I have found some external datasets which can be used to check if my code works or not. The goal of my sample project is detecting prospective churners with the churn definition which is "customers don't have any active account anymore are considered as churners".  <br>
 
 ## Installing 
 
@@ -17,14 +17,19 @@ Make sure you have installed the package (pip command above). To run the full-en
 
     1. getting the data and labels 
     2. splitting data into train & test
-    3. training & validating the model
+    3. training & testing the model
     
     
 ## Structure
 
-The structure of the notebooks directory: <br>
+The structure of the "notebooks" directory: <br>
 
     * exploration folder: It contains some notebooks which are not included into pipeline but are used in exploration/analysis part.
     * 00_prepare_transaction_data.ipynb
     * 01_label_data.ipynb
+    * 02_extract_features.ipynb
+    * 03_train_test_split.ipynb
+    * 04_classification_model.ipynb
     * index.ipynb
+    
+There is also "data" folder which has csv files in the same path where "notebooks" folder is. <br>

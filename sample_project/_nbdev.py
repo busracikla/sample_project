@@ -3,10 +3,20 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"Create_Data": "00_prepare_transaction_data.ipynb",
-         "Label_Data": "01_label_data.ipynb"}
+         "Label_Data": "01_label_data.ipynb",
+         "extract_features": "02_extract_features.ipynb",
+         "Stratified_Split": "03_train_test_split.ipynb",
+         "check_class_balance": "03_train_test_split.ipynb",
+         "Classifier": "04_classification_model.ipynb",
+         "show_performance": "04_classification_model.ipynb",
+         "plot_confusion_matrix": "04_classification_model.ipynb",
+         "plot_roc_curve": "04_classification_model.ipynb"}
 
 modules = ["preprocess/prepare_transaction_data.py",
-           "preprocess/label_data.py"]
+           "preprocess/label_data.py",
+           "preprocess/extract_features.py",
+           "model/train_test_split.py",
+           "model/classifier.py"]
 
 doc_url = "https://busracikla.github.io/sample_project/"
 
