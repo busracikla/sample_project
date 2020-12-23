@@ -1,5 +1,8 @@
 
-# I'm used to create a file which holds names of tables only and to call these names in the notebooks while reading data so that only changing this module will be quite efficient in case of any change of data sets to be used. Since I create this sample project in my local computer, I don't have access to Hive and I can't use tables from Hive in this sample project. Because of that hive table names are commented out.
+# I'm used to create a file which holds names of tables only and to call these names in the notebooks while reading data 
+# so that only changing this module will be quite efficient in case of any change of data sets to be used. 
+# Since I create this sample project in my local computer, I don't have access to Hive and I can't use tables from Hive in this sample project. 
+#Because of that hive table names are commented out.
 
 
 # RAW DATA FROM HIVE
