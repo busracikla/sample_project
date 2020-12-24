@@ -1,6 +1,6 @@
 # Sample Project
 
-As a part of my application, I created this project to show a sample from my way of coding. I have found some external datasets which can be used to check if my code works or not. The goal of my sample project is detecting prospective churners with the churn definition which is "customers don't have any active account anymore are considered as churners".  <br>
+As a part of my job application, I created this project so that I can demonstrate a sample from my coding. I have found some external datasets which can be used to check if my code works or not. The goal of my sample project is writing code which can be usable in detecting prospective churners with the churn definition which is "customers don't have any active account anymore are considered as churners".  <br>
 
 ## Installing 
 
@@ -32,3 +32,7 @@ The structure of the "notebooks" directory: <br>
     * 04_classification_model.ipynb
     * index.ipynb
     
+<<<<<<< HEAD
+=======
+There is also "data" folder which has csv files in the same path where "notebooks" folder is. <br>
+>>>>>>> 458e07db3c2a1061c7d9c91acc2432dd848b2c19
