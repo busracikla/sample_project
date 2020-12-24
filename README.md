@@ -31,8 +31,4 @@ The structure of the "notebooks" directory: <br>
     * 03_train_test_split.ipynb
     * 04_classification_model.ipynb
     * index.ipynb
-    
-<<<<<<< HEAD
-=======
-There is also "data" folder which has csv files in the same path where "notebooks" folder is. <br>
->>>>>>> 458e07db3c2a1061c7d9c91acc2432dd848b2c19
+   
