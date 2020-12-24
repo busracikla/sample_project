@@ -5,16 +5,19 @@
 #Because of that hive table names are commented out.
 
 
+# PATH PREFIX FOR FOLDER WHICH HOLDS CSV FILES
+DATA_DIR = "../data/"
+
 # RAW DATA FROM HIVE
 #TABLE_CUSTOMER = "domino.customer_list"
 #TABLE_TRANSACTIONS = "domino.customer_transactios"
 
 # RAW DATA FROM CSV
-CSV_TRANSACTION = "transaction.csv"
-CSV_CUST_INFO = "client.csv"
-CSV_DISP_INFO = "disp.csv"
-CSV_ACCOUNT_INFO = "account.csv"
-CSV_LOAN = "loan.csv"
+CSV_TRANSACTION = DATA_DIR + "transaction.csv"
+CSV_CUST_INFO = DATA_DIR + "client.csv"
+CSV_DISP_INFO = DATA_DIR + "disp.csv"
+CSV_ACCOUNT_INFO = DATA_DIR + "account.csv"
+CSV_LOAN = DATA_DIR + "loan.csv"
 
 
 # INTERMEDIATE DATA FROM HIVE
@@ -22,19 +25,18 @@ CSV_LOAN = "loan.csv"
 #TABLE_CUSTOMER_TRNX = "domino.customer_merged_trnx"
 
 # INTERMEDIATE DATA FROM CSV
-CSV_CUSTOMIZED_TRNX = "customized_trnx_data.csv"
-CSV_LABELLED_TRNX = "labelled_trnx_data.csv"
-CSV_CUST_FEATS = "customer_list_w_feats.csv"
+CSV_CUSTOMIZED_TRNX = DATA_DIR + "customized_trnx_data.csv"
+CSV_LABELLED_TRNX = DATA_DIR + "labelled_trnx_data.csv"
+CSV_CUST_FEATS = DATA_DIR + "customer_list_w_feats.csv"
 
 
 # FINAL MODEL DATA FROM HIVE
 #TABLE_CHURN_MODEL = "domino.churn_model_data"
 
 # FINAL MODEL DATA FROM CSV
-CSV_CHURN_MODEL = "customer_list_w_feats.csv"
+CSV_CHURN_MODEL = DATA_DIR + "customer_list_w_feats.csv"
 
 
-# PATH PREFIX FOR FOLDER WHICH HOLDS CSV FILES
-DATA_DIR = "../data/"
+
 
 

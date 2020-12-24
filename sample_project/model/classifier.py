@@ -23,7 +23,7 @@ from IPython.display import display
 # Cell
 class Classifier:
     '''
-    This class builds classifier and make predictions for train and test set
+    This class builds classifier and makes predictions for both train and test set
     Args:
             model (classifier): The classifer method with must parameters
             parameter_ranges (dict): It includes parameters together with ranges to be searched in RandomSearchCv

@@ -60,7 +60,7 @@ class Create_Data:
 
         if self.to_csv:
 
-            write_to_csv(df= main_data,save_as = config.CSV_CUSTOMIZED_TRNX )
+            write_to_csv(df= main_data, path = config.CSV_CUSTOMIZED_TRNX )
 
         return main_data
 

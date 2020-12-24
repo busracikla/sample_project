@@ -37,6 +37,6 @@ def extract_features(df, to_csv=True, with_label=True):
     feats.columns=["client_id"]+["{}_bin_{}".format(j,i) for i in np.arange(0,10) for j in ["sum","count"]]
 
     if with_label: feats = feats.merge(df[["client_id","churn_or_not"]].drop_duplicates(),on="client_id",how="left")
-    if to_csv: write_to_csv(feats, "customer_list_w_feats.csv")
+    if to_csv: write_to_csv(feats, config.CSV_CUST_FEATS)
 
     return feats

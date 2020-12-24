@@ -46,27 +46,27 @@ def write_to_hive(sdf, save_as):
     
 
 
-def write_to_csv(df, save_as):
+def write_to_csv(df, path):
     '''
         Common script to write data into csv
         
         Args:
            df (pandas dataframe): Desired data to be written into csv
-           save_as (string): Name of the csv file to be written 
+           path (string): Name of the csv file to be written together with directory path in the beginning (Ex: ../data/csv_name.csv)
             
     '''
-    return df.to_csv(config.DATA_DIR + save_as)
+    return df.to_csv(path)
 
 
-def read_from_csv(csv_name):
+def read_from_csv(path):
     '''
         Common script to read data from csv
         
         Args:
-           csv_name (string): Name of the csv file to be read 
+           path (string): Name of the csv file to be read together with directory path in the beginning (Ex: ../data/csv_name.csv)
             
     '''
-    return pd.read_csv(config.DATA_DIR + csv_name, index_col=[0])
+    return pd.read_csv(path, index_col=[0])
 
 
 
