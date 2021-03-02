@@ -29,17 +29,16 @@ class Stratified_Split:
             test (pandas DataFrame): the test set which includes both features and label
 
     '''
-    def __init__(self, model_data = None, test_size=0.1, seed=42, do_downsample=False):
+    def __init__(self, model_data = config.CSV_CHURN_MODEL, test_size=0.1, seed=42, do_downsample=False):
 
         store_attr()
-
-        if model_data == None: model_data = config.CSV_CHURN_MODEL
-        self.model_data = read_from_csv(model_data)
 
 
     def __call__(self):
 
-        train, test = train_test_split(self.model_data, stratify = self.model_data["churn_or_not"], test_size=self.test_size, random_state=self.seed)
+        df_model_data = read_from_csv(self.model_data)
+
+        train, test = train_test_split(df_model_data, stratify = df_model_data["churn_or_not"], test_size=self.test_size, random_state=self.seed)
 
         if self.do_downsample:
             train = self._downsample(train)
@@ -47,8 +46,8 @@ class Stratified_Split:
         return train, test
 
     def _downsample(self,df):
-        return pd.concat(model_data[model_data["churn_or_not"]==1],
-                         model_data[model_data["churn_or_not"]==0].sample(len(model_data[model_data["churn_or_not"]==1])))
+        return pd.concat([df[df["churn_or_not"]==1],
+                         df[df["churn_or_not"]==0].sample(len(df[df["churn_or_not"]==1]))],axis=0)
 
 
 # Cell
